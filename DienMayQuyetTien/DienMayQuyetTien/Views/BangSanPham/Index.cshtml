@@ -1,16 +1,16 @@
 ﻿@model IEnumerable<DienMayQuyetTien.Models.BangSanPham>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Quản lý sản phẩm";
 }
 
-<h2>Index</h2>
+<h2>Quản lý sản phẩm</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Thêm sản phẩm", "Create",null, new { @class = "btn btn-success" })
 </p>
-<table class="table">
-    <tr>
+<table class="table table-bordered table-hover">
+    <tr style="background-color:Gray;">
         <th>
             @Html.DisplayNameFor(model => model.MaSP)
         </th>
@@ -59,9 +59,9 @@
             @Html.DisplayFor(modelItem => item.LoaiSanPham.TenLoai)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            @Html.ActionLink("Edit", "Edit", new { id = item.id }, new { @class = "btn btn-primary" }) 
+            @Html.ActionLink("Details", "Details", new { id=item.id },new { @class = "btn btn-info" }) 
+            @Html.ActionLink("Delete", "Delete", new { id=item.id },new { @class = "btn btn-danger" })
         </td>
     </tr>
 }
