@@ -4,19 +4,18 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Thêm sản phẩm</h2>
+<h2>Thêm sản phẩm mới</h2>
 
 
-@using (Html.BeginForm("Create","BangSanPham", new{ entype ="multipart/form-data"} )) 
+@using (Html.BeginForm("Create", "BangSanPham", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal"> 
-        <hr />
+
+    <div class="form-horizontal">
         @Html.ValidationSummary(true)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MaSP, "Mã sản phẩm", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.MaSP, "Mã SP", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.TextBoxFor(model => model.MaSP, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.MaSP)
@@ -24,7 +23,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TenSP,"Tên sản phẩm", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.TenSP, "Tên sản phẩm", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.TextBoxFor(model => model.TenSP, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.TenSP)
@@ -32,7 +31,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Loai_id, "Loại", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Loai_id, "Loại", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("Loai_id", (IEnumerable<SelectListItem>)ViewData["Loai_id"], new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Loai_id)
@@ -40,15 +39,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.GiaBan,"Giá bán", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.GiaBan, new { type = "number", @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.GiaBan)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.GiaGoc,"Giá gốc", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.GiaGoc, "Giá gốc", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.TextBoxFor(model => model.GiaGoc, new { type = "number", @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.GiaGoc)
@@ -56,7 +47,15 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.GiaGop,"Giá góp", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.GiaBan, "Giá bán", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.GiaBan, new { type = "number", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.GiaBan)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GiaGop, "Giá góp", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.TextBoxFor(model => model.GiaGop, new { type = "number", @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.GiaGop)
@@ -64,46 +63,45 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.SoLuongTon,"Tồn", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SoLuongTon, "Số lượng", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.TextBoxFor(model => model.SoLuongTon, new { type = "number", @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.SoLuongTon)
             </div>
         </div>
+
         <div class="form-group">
-            @Html.Label("HinhAnh","Hình sản phẩm", new { @class = "control-label col-md-2" })
+            @Html.Label("HinhAnh", "Hình sản phẩm", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.TextBox("HinhAnh", null, new { type = "file", onchange = "readURL(this)", @class = "form-control" })
                 @Html.ValidationMessage("HinhAnh")
                 <img id="HinhSP" src="" />
             </div>
         </div>
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Thêm" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Trở về", "Index")
+    @Html.ActionLink("Back to List", "Index")
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-}
-<script>
-    function readURL(input) {
-
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $('#HinhSP').attr('src', e.target.result);
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#HinhSP').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
             }
-
-            reader.readAsDataURL(input.files[0]);
         }
-    }
-</script>
+    </script>
+}

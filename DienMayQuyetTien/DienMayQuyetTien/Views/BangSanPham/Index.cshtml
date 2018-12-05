@@ -19,6 +19,7 @@
             <th>Giá góp</th>
             <th>Tồn</th>
             <th>Loại</th>
+            <th>Hình SP</th>
             <th></th>
         </tr>
     </thead>
@@ -48,13 +49,16 @@
                     @item.LoaiSanPham.TenLoai
                 </td>
                 <td>
+                    <img src="@Url.Action("Details", new { id = item.id })" width="150" height="100" />
+                </td>
+                <td>
                     <a href="@Url.Action("Edit", new {id = item.id})">
                         <span class="glyphicon glyphicon-pencil"></span>
                     </a>
                     <a href="@Url.Action("Details", new {id = item.id})">
                         <span class="glyphicon glyphicon-info-sign"></span>
                     </a>
-                    <a href="@Url.Action("Edit", new {id = item.id})">
+                    <a href="@Url.Action("Delete", new {id = item.id})">
                         <span class="glyphicon glyphicon-trash"></span>
                     </a>
                 </td>
